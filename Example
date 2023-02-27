@@ -1,0 +1,74 @@
+const soup = {
+  name: "Soup",
+  steps: [
+    "Prepare ingredients",
+    "Cook soup",
+    "Serve soup"
+  ]
+};
+
+const fishAndChips = {
+  name: "Fish and Chips",
+  steps: [
+    "Prepare ingredients",
+    "Fry fish and chips",
+    "Serve fish and chips"
+  ]
+};
+
+const mealPlan = {
+  name: "Two-Course Meal",
+  steps: [
+    {
+      name: "Starter",
+      items: [soup]
+    },
+    {
+      name: "Main Course",
+      items: [fishAndChips]
+    }
+  ]
+};
+
+function generateDiagramScript(mealPlan) {
+  let diagramScript = "";
+
+  mealPlan.steps.forEach((course, index) => {
+    const courseName = course.name;
+    const courseItems = course.items;
+
+    diagramScript += `### ${courseName}\n`;
+
+    courseItems.forEach((item) => {
+      const itemName = item.name;
+      const itemSteps = item.steps;
+
+      diagramScript += `#### ${itemName}\n`;
+
+      itemSteps.forEach((step) => {
+        diagramScript += `* ${step}\n`;
+      });
+
+      if (index === 0) {
+        diagramScript += `* Serve ${itemName}\n`;
+      }
+    });
+  });
+
+  return diagramScript;
+}
+
+const diagramScript = generateDiagramScript(mealPlan);
+console.log(diagramScript);
+### Starter
+#### Soup
+* Prepare ingredients
+* Cook soup
+* Serve soup
+* Serve Soup
+
+### Main Course
+#### Fish and Chips
+* Prepare ingredients
+* Fry fish and chips
+* Serve fish and chips
